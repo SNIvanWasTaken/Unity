@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MoversePlayer : MonoBehaviour
 {
+    [SerializeField] float velocidad = 4;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,7 @@ public class MoversePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float horizontal = Input.GetAxis("Horizontal");
+        transform.Translate(horizontal * velocidad * Time.deltaTime, 0, 0);
     }
 }
