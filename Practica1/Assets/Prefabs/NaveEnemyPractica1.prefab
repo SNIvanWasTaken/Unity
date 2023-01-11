@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdef038685fe8254ca0e0c918d1ecf71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabBala: {fileID: 6058641205471680686, guid: 1524e4f56eadf5449b89bc877b556ee1, type: 3}
+  prefabBala: {fileID: 6764618979767944558, guid: bf9ec59436dabde41ac346fd9e334a85, type: 3}
   velocidadBala: 3
 --- !u!82 &2173041058898041423
 AudioSource:
@@ -170,7 +170,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

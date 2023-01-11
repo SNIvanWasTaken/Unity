@@ -23,6 +23,7 @@ public class DispararEnemigo : MonoBehaviour
         yield return new WaitForSeconds(pausa);
         Transform disparo = Instantiate(prefabBala, transform.position, Quaternion.identity);
         disparo.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(velocidadBala, 0, 0);
+        GetComponent<AudioSource>().Play();
         Destroy(disparo.gameObject, 8f);
         StartCoroutine(Disparar());
     }
