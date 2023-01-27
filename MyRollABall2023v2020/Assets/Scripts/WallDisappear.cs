@@ -20,7 +20,11 @@ public class WallDisappear : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
+    }
+    public void Restore()
+    {
+        gameObject.SetActive(true);
     }
 }

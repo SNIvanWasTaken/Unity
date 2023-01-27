@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 	public float salto = 5;
 	public Text countText;
 	public Text winText;
+	private Vector3 initialPosition;
 
 	// Create private references to the rigidbody component on the player, and the count of pick up objects picked up so far
 	private Rigidbody rb;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 		re = GetComponentInChildren<Renderer>();
 		// Set the count to zero 
 		count = 0;
+		initialPosition = transform.position;
 
 		// Run the SetCountText function to update the UI (see below)
 		SetCountText ();
@@ -95,5 +97,9 @@ public class PlayerController : MonoBehaviour {
 		{
 			re.material.color = new Color(Random.value, Random.value, Random.value);
         }
+    }
+	public void Restore()
+    {
+		transform.position = initialPosition;
     }
 }

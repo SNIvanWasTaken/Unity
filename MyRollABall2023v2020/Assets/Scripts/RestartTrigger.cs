@@ -20,7 +20,9 @@ public class RestartTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            FindObjectOfType<PlayerController>().Restore();
+            FindObjectOfType<WallDisappear>().Restore();
+            FindObjectOfType<Rotator>().Restore();
         }
     }
 }

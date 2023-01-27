@@ -13,4 +13,8 @@ public class Rotator : MonoBehaviour {
 
 		transform.Rotate(giro * Time.deltaTime);
 	}
+	public void Restore()
+    {
+
+    }
 }	
