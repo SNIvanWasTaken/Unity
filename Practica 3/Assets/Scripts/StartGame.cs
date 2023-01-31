@@ -17,6 +17,7 @@ public class StartGame : MonoBehaviour
         
     }
 
+    //Este script inicia el primer nivel cuando se le da al botón
     public void StartLevel()
     {
         SceneManager.LoadScene("2. Drangleic's Castle");
