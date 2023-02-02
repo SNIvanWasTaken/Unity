@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
+    public float PosX { get => posX; set => posX = value; }
+    public float PosY { get => posY; set => posY = value; }
+
     [SerializeField] float velocidad = 7f;
     [SerializeField] float velocidadSalto = 1f;
+    private float posX, posY;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer sr;
     private bool playing = false;
     private float play = 0.44f;
     private float stop;
-    private float alturaPersonaje;  
+    private float alturaPersonaje;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        PosX = transform.position.x;
+        PosY = transform.position.y;
         rb = GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
         sr = gameObject.GetComponent<SpriteRenderer>();
@@ -53,27 +60,31 @@ public class MovePlayer : MonoBehaviour
         {
             playing = false;
         }
-        if (horizontal > 0.1f && !playing)
+        if (horizontal > 0.15f && !playing)
         {
             sr.flipX = false;
             animator.Play("NerdRunning");
             playing = true;
             stop = Time.time + play;
         }
-        else if (horizontal < -0.1f && !playing)
+        else if (horizontal < -0.15f && !playing)
         {
             sr.flipX = true;
             animator.Play("NerdRunning");
             playing = true;
             stop = Time.time + play;
         }
-        if (rb.velocity.y > 0)
+        if (rb.velocity.y > 0.2)
         {
             animator.Play("Jump");
         }
-        else if (rb.velocity.y < 0) 
+        else if (rb.velocity.y < -0.3) 
         {
             animator.Play("Falling");
         }
+    }
+    public void Respawn()
+    {
+        transform.position = new Vector2(PosX, PosY);
     }
 }

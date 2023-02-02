@@ -20,7 +20,7 @@ public class EnterKeybladeGraveyard : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("4. Keyblade Graveyard");
+            SceneManager.LoadScene("4.Keyblade Graveyard");
         }
     }
 }

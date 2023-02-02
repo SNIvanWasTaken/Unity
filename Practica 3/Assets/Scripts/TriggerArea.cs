@@ -31,7 +31,7 @@ public class TriggerArea : MonoBehaviour
     //Al colisionar con algo invisible al principio, mostrará el texto.
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && hasEntered == false)
+        if (collision.CompareTag("Player") && !hasEntered)
         {
             area.enabled = true;
             disappear = Time.time + appear;

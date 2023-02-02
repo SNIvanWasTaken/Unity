@@ -20,7 +20,7 @@ public class EnterRidleyLair : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("3. Ridley's Lair");
+            SceneManager.LoadScene("3.Ridley's Lair");
         }
     }
 }

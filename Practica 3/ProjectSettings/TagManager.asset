@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bonfire
   - Light Circle
+  - Enemy
   layers:
   - Default
   - TransparentFX

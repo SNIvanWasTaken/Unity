@@ -11,13 +11,16 @@ public class Pickups : MonoBehaviour
     [SerializeField] Transform portal;
     private BoxCollider2D col;
     private SpriteRenderer s;
-    private int counter = 0;
+    private int counter;
     private float appear = 2f;
     private float disappear;
+    private int healCounter;
 
     // Start is called before the first frame update
     void Start()
     {
+        counter = 0;
+        healCounter = 0;
         col = portal.gameObject.GetComponent<BoxCollider2D>();
         s = portal.gameObject.GetComponent<SpriteRenderer>();
         col.enabled = false;
@@ -43,11 +46,20 @@ public class Pickups : MonoBehaviour
             Instantiate(prefabParticula, collision.transform.position, Quaternion.identity);
             Destroy(gameObject);
             counter++;
+            healCounter++;
             disappear = Time.time + appear;
+            if (healCounter == 5)
+            {
+                FindObjectOfType<GameManager>().HealPlayer();
+                healCounter = 0;
+            }
         }
-        if (counter == 10)
+        if (counter >= 1)
         {
             path.enabled = true;
+        }
+        if(counter >= 10)
+        {
             col.enabled = true;
             s.enabled = true;
         }

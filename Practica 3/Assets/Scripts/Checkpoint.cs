@@ -8,14 +8,16 @@ public class Checkpoint : MonoBehaviour
     //Este script enseña un texto de checkpoint y cambiará el spawn.
 
     [SerializeField] Text lit;
-    [SerializeField] Text key;
+    [SerializeField] AudioSource bonfireSFX;
     private float appear = 2f;
     private float disappear;
+    private bool alreadyPlayed = false;
     // Start is called before the first frame update
     void Start()
     {
         lit.enabled = false;
-        key.enabled = false;
+        bonfireSFX = GetComponent<AudioSource>();
+
     }
 
     // Al pasar 2 segundos, el texto desaparece
@@ -25,27 +27,19 @@ public class Checkpoint : MonoBehaviour
         {
             lit.enabled = false;
         }
-        if (key.enabled && Time.time >= disappear)
-        {
-            key.enabled = false;
-        }
     }
 
     //Al colisionar con una hoguera o círculo de luz, mostrará el texto y cambiará el spawn.
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(gameObject.CompareTag("Bonfire") && collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && alreadyPlayed == false)
         {
             lit.enabled = true;
+            bonfireSFX.Play();
+            alreadyPlayed = true;
             disappear = Time.time + appear;
-            
-            //Set checkpoint
-        }
-        else if(gameObject.CompareTag("Light Circle") && collision.CompareTag("Player"))
-        {
-            key.enabled = true;
-            disappear = Time.time + appear;
-            //Set checkpoint
+            FindObjectOfType<MovePlayer>().PosX = transform.position.x;
+            FindObjectOfType<MovePlayer>().PosY = transform.position.y;
         }
     }
 }

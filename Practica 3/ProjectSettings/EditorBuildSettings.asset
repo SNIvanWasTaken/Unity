@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/1.Intro.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/2.Drangleic's Castle.unity
+    guid: a362df895de2f234aa374aa3dedd67ac
+  - enabled: 1
+    path: Assets/Scenes/3.Ridley's Lair.unity
+    guid: 3a9cce1d64e616a4fb039186f505e687
+  - enabled: 1
+    path: Assets/Scenes/4.Keyblade Graveyard.unity
+    guid: ddce32d57859f354a9dca0dffb5fa5f6
+  - enabled: 1
+    path: Assets/Scenes/5.Kiln of the First Flame.unity
+    guid: 64c79f08f78376b47ab81e0d82c8770c
   m_configObjects: {}

@@ -20,7 +20,7 @@ public class EnterKilnOfTheFirstFlame : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("5. Kiln of the First Flame");
+            SceneManager.LoadScene("5.Kiln of the First Flame");
         }
     }
 }
