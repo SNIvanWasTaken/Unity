@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class Pickups : MonoBehaviour
 {
     //Este script hace todo lo que tiene que ver con pickups
+    public int Counter { get => counter; set => counter = value; }
+    public int HealCounter { get => healCounter; set => healCounter = value; }
+
     [SerializeField] Text path;
     [SerializeField] Transform prefabParticula;
-    [SerializeField] Transform portal;
-    private BoxCollider2D col;
-    private SpriteRenderer s;
     private int counter;
     private float appear = 2f;
     private float disappear;
@@ -20,11 +20,7 @@ public class Pickups : MonoBehaviour
     void Start()
     {
         counter = 0;
-        healCounter = 0;
-        col = portal.gameObject.GetComponent<BoxCollider2D>();
-        s = portal.gameObject.GetComponent<SpriteRenderer>();
-        col.enabled = false;
-        s.enabled = false;
+        HealCounter = 0;
         path.enabled = false;
     }
 
@@ -35,6 +31,13 @@ public class Pickups : MonoBehaviour
         {
             path.enabled = false;
         }
+        if (healCounter >= 2)
+        {
+            Debug.Log("Lo conseguiste");
+            FindObjectOfType<GameManager>().HealPlayer();
+            healCounter = 0;
+        }
+
     }
 
     //Al colisionar con el jugador, se emitirán partículas, destruiran el pickup y incrementa el contador
@@ -46,23 +49,8 @@ public class Pickups : MonoBehaviour
             Instantiate(prefabParticula, collision.transform.position, Quaternion.identity);
             Destroy(gameObject);
             counter++;
-            healCounter++;
+            healCounter += 1;
             disappear = Time.time + appear;
-            if (healCounter >= 5)
-            {
-                FindObjectOfType<GameManager>().HealPlayer();
-                healCounter = 0;
-            }
-        }
-        if (counter >= 1)
-        {
-            path.enabled = true;
-            col.enabled = true;
-            s.enabled = true;
-        }
-        if(counter >= 10)
-        {
-
         }
     }
 }

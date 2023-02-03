@@ -42,7 +42,7 @@ public class MovePlayer : MonoBehaviour
 
         if (salto > 0)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(0, -0.5f));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(0, -0.05f));
             if (hit.collider != null)
             {
                 float distanciaAlSuelo = hit.distance;
