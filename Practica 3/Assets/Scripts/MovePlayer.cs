@@ -9,6 +9,7 @@ public class MovePlayer : MonoBehaviour
 
     [SerializeField] float velocidad = 7f;
     [SerializeField] float velocidadSalto = 1f;
+    private float gravMultiplier = 5f;
     private float posX, posY;
     private Rigidbody2D rb;
     private Animator animator;
@@ -41,7 +42,7 @@ public class MovePlayer : MonoBehaviour
 
         if (salto > 0)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(0, -1));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(0, -0.5f));
             if (hit.collider != null)
             {
                 float distanciaAlSuelo = hit.distance;
@@ -86,5 +87,12 @@ public class MovePlayer : MonoBehaviour
     public void Respawn()
     {
         transform.position = new Vector2(PosX, PosY);
+    }
+    private void FixedUpdate()
+    {
+        if (rb.velocity.y < 0)
+        {
+            rb.gravityScale = gravMultiplier;
+        }
     }
 }

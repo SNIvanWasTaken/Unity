@@ -48,7 +48,7 @@ public class Pickups : MonoBehaviour
             counter++;
             healCounter++;
             disappear = Time.time + appear;
-            if (healCounter == 5)
+            if (healCounter >= 5)
             {
                 FindObjectOfType<GameManager>().HealPlayer();
                 healCounter = 0;
@@ -57,11 +57,12 @@ public class Pickups : MonoBehaviour
         if (counter >= 1)
         {
             path.enabled = true;
+            col.enabled = true;
+            s.enabled = true;
         }
         if(counter >= 10)
         {
-            col.enabled = true;
-            s.enabled = true;
+
         }
     }
 }
