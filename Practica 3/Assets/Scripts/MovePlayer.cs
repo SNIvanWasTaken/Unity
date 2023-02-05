@@ -7,18 +7,18 @@ public class MovePlayer : MonoBehaviour
     public float PosX { get => posX; set => posX = value; }
     public float PosY { get => posY; set => posY = value; }
 
-    [SerializeField] float velocidad = 7f;
-    [SerializeField] float velocidadSalto = 1f;
-    private float gravMultiplier = 5f;
+    public float velocidad;
+    public float velocidadSalto;
+    [SerializeField] float gravMultiplier;
     private float posX, posY;
     private Rigidbody2D rb;
-    private Animator animator;
+    public Animator animator;
     private SpriteRenderer sr;
     private bool playing = false;
     private float play = 0.44f;
     private float stop;
     private float alturaPersonaje;
-
+    [SerializeField] bool isRidley;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +36,26 @@ public class MovePlayer : MonoBehaviour
     {
         //Salto
 
+
         float horizontal = Input.GetAxis("Horizontal");
         transform.Translate(horizontal * velocidad * Time.deltaTime, 0, 0);
+        if (horizontal > 0.1 || horizontal < -0.1)
+        {
+            if (horizontal > 0.1)
+            {
+                sr.flipX = false;
+            }
+            else if (horizontal < -0.1)
+            {
+                sr.flipX = true;
+            }
+            animator.SetBool("Run", true);
+        }
+        else
+        {
+            animator.SetBool("Run", false);
+        }
+
         float salto = Input.GetAxis("Jump");
 
         if (salto > 0)
@@ -49,10 +67,17 @@ public class MovePlayer : MonoBehaviour
                 bool tocandoElSuelo = distanciaAlSuelo < alturaPersonaje;
                 if (tocandoElSuelo)
                 {
+                    animator.SetBool("Jump", true);
                     Vector3 fuerzaSalto = new Vector3(0, velocidadSalto, 0);
                     rb.AddForce(fuerzaSalto, ForceMode2D.Impulse);
                 }
-            }           
+            }
+        }
+        
+
+        if (rb.velocity.y < -2.5f && isRidley) 
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -2.5f);
         }
 
         //Animaciones
@@ -61,7 +86,7 @@ public class MovePlayer : MonoBehaviour
         {
             playing = false;
         }
-        if (horizontal > 0.15f && !playing)
+        /*if (horizontal > 0.15f && !playing)
         {
             sr.flipX = false;
             animator.Play("NerdRunning");
@@ -74,14 +99,21 @@ public class MovePlayer : MonoBehaviour
             animator.Play("NerdRunning");
             playing = true;
             stop = Time.time + play;
-        }
-        if (rb.velocity.y > 0.2)
+        }*/
+        //if (rb.velocity.y > 0.2)
         {
-            animator.Play("Jump");
+        //    animator.Play("Jump");
         }
-        else if (rb.velocity.y < -0.3) 
+        /*else*/
+        if (rb.velocity.y < -0.3)
         {
-            animator.Play("Falling");
+            animator.SetBool("Run", false);
+            animator.SetBool("Jump", false);
+            animator.SetBool("Falling",true);
+        }
+        else 
+        {
+            animator.SetBool("Falling", false);
         }
     }
     public void Respawn()

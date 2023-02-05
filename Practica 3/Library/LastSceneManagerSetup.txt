@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/2.Drangleic's Castle.unity
+- path: Assets/Scenes/5.Kiln of the First Flame.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

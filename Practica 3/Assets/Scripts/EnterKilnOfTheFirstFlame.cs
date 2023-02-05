@@ -16,11 +16,11 @@ public class EnterKilnOfTheFirstFlame : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("5.Kiln of the First Flame");
+            SceneManager.LoadScene("Loading4");
         }
     }
 }

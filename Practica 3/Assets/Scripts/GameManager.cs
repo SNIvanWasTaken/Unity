@@ -6,28 +6,47 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] Transform portal;
     [SerializeField] Text soulsText;
+    [SerializeField] Text path;
+    [SerializeField] GameObject portal;
+    private int totalPickups;
     private int souls;
     [SerializeField] Text gameOver;
-    [SerializeField] Text path;
     [SerializeField] Text lit;
     [SerializeField] AudioClip gameOverSFX;
     private float appear = 2f;
     private float disappear;
-    private BoxCollider2D col;
-    private SpriteRenderer s;
+    private int counter;
+    private int healCounter;
+    [SerializeField] bool isEnding;
+
+    private GameStatus gs;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        totalPickups = GameObject.FindObjectsOfType<Pickups>().Length;
         souls = 5;
         lit.enabled = false;
-        col = portal.gameObject.GetComponent<BoxCollider2D>();
-        s = portal.gameObject.GetComponent<SpriteRenderer>();
-        col.enabled = false;
-        s.enabled = false;
+        counter = 0;
+        healCounter = 0;
+
+        gs = FindObjectOfType<GameStatus>();
+        souls = gs.souls;
+        healCounter = gs.healCounter;
+    }
+
+    public void addPickup() 
+    {
+        healCounter++;
+        counter++;
+        if (counter >= totalPickups) 
+        {
+            path.enabled = true;
+            portal.GetComponent<SpriteRenderer>().enabled = true;
+            portal.GetComponent<BoxCollider2D>().enabled = true;
+        }
     }
 
     // Update is called once per frame
@@ -35,19 +54,22 @@ public class GameManager : MonoBehaviour
     {
         if (lit.enabled && Time.time >= disappear)
         {
-            lit.enabled = false;
+            if (!isEnding)
+            {
+                lit.enabled = false;
+            }
         }
-        if (path.enabled && Time.time >= disappear)
+        if (healCounter >= 5)
         {
-            path.enabled = false;
+            HealPlayer();
+            healCounter = 0;
         }
-
     }
 
     public void HurtPlayer()
     {
-        souls--;
-        soulsText.text = "You have " + souls + " souls remaining";
+        gs.souls--;
+        soulsText.text = "You have " + gs.souls + " souls remaining";
         FindObjectOfType<MovePlayer>().Respawn();
         if (souls <= 0)
         {
@@ -60,8 +82,8 @@ public class GameManager : MonoBehaviour
 
     public void HealPlayer()
     {
-        souls++;
-        soulsText.text = "You have " + souls + " souls remaining"; 
+        gs.souls++;
+        soulsText.text = "You have " + gs.souls + " souls remaining"; 
     }
 
     private IEnumerator BackToTitleScreen()
@@ -80,8 +102,6 @@ public class GameManager : MonoBehaviour
             alreadyPlayed = true;
             disappear = Time.time + appear;
         }
-        //lit.enabled = true;
-        //disappear = Time.time + appear;
     }
 
 }
