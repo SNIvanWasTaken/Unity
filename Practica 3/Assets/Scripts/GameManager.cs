@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
         gs = FindObjectOfType<GameStatus>();
         souls = gs.souls;
         healCounter = gs.healCounter;
+        soulsText.text = "You have " + gs.souls + " souls remaining";
+
     }
 
     public void addPickup() 
@@ -71,7 +73,7 @@ public class GameManager : MonoBehaviour
         gs.souls--;
         soulsText.text = "You have " + gs.souls + " souls remaining";
         FindObjectOfType<MovePlayer>().Respawn();
-        if (souls <= 0)
+        if (gs.souls <= 0)
         {
             gameOver.text = "Game over";
             AudioSource.PlayClipAtPoint(gameOverSFX, transform.position);

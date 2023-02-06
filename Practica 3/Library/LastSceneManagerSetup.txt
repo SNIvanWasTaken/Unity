@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/5.Kiln of the First Flame.unity
+- path: Assets/Scenes/4.Keyblade Graveyard.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
