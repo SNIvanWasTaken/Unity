@@ -6,6 +6,7 @@ public class Enemies : MonoBehaviour
 {
     [SerializeField] Transform[] waypoints;
     [SerializeField] float speed;
+    public Vector2 initialPos;
     int nextStep = 0;
     Vector2 nextWaypoint;
     bool goingForward = true;
@@ -15,6 +16,7 @@ public class Enemies : MonoBehaviour
     void Start()
     {
         nextWaypoint = waypoints[0].position;
+        initialPos = new Vector2(transform.position.x, transform.position.y);
     }
 
     // Update is called once per frame
