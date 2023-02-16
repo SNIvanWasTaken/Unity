@@ -53,8 +53,8 @@
     <UnityVersion>2020.3.19f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Low Poly Guns\Scripts\GunView.cs" />
-    <Compile Include="Assets\Low Poly Guns\Scripts\GunsMenu.cs" />
+    <Compile Include="Assets\Scripts\Enemies.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
