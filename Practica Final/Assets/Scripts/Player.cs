@@ -16,16 +16,22 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            shot.Play();
-            float distanciaMaxima = 10;
-            RaycastHit hit;
-            bool impactado = Physics.Raycast(camara.transform.position,
-            camara.transform.forward, out hit, distanciaMaxima);
-            if (impactado)
+            FindObjectOfType<GameManager>().DecreaseAmmo();
+            if (FindObjectOfType<GameManager>().gs.ammo > 0)
             {
-                if (hit.collider.CompareTag("Enemigo"))
+                shot.Play();
+                float distanciaMaxima = 10;
+                RaycastHit hit;
+                bool impactado = Physics.Raycast(camara.transform.position,
+                camara.transform.forward, out hit, distanciaMaxima);
+                if (impactado)
                 {
-                    hit.collider.gameObject.GetComponent<Enemies>().HurtZombie();                }
+                    if (hit.collider.CompareTag("Enemigo"))
+                    {
+                        hit.collider.gameObject.GetComponent<Enemies>().HurtZombie();
+                    }
+                }
+
             }
         }
     }

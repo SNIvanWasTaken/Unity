@@ -1,1 +1,5 @@
-sceneSetups: []
+sceneSetups:
+- path: Assets/Scenes/2.Drangleic's Castle.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0

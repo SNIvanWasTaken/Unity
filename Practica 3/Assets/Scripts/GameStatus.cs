@@ -19,14 +19,14 @@ public class GameStatus : MonoBehaviour
     }
     private void Awake()
     {
-        int gameStatusCount = FindObjectsOfType<GameStatus>().Length;
-        if(gameStatusCount > 1)
-        {
+            int gameStatusCount = FindObjectsOfType<GameStatus>().Length;
+            if(gameStatusCount > 1)
+            {
 
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-        }
+            }
+            else
+            {
+                DontDestroyOnLoad(gameObject);
+            }
     }
 }

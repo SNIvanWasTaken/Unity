@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
             AudioSource.PlayClipAtPoint(gameOverSFX, transform.position);
             StartCoroutine(BackToTitleScreen());
         }
-
     }
 
     public void HealPlayer()
