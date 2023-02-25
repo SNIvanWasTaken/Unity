@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class Enemies : MonoBehaviour
 {
+    //Este script es el del enemigo.
+
     [SerializeField] Transform[] wayPoints;
     private NavMeshAgent navMeshAgent;
     [SerializeField] GameObject objective;
@@ -21,7 +23,7 @@ public class Enemies : MonoBehaviour
     private float appear = 1f;
     private bool isDying = false;
 
-
+    //Al empezar pillamos sus componentes necesarios y asignamos los waypoints.
     void Start()
     {
         siguientePosicion = wayPoints[0].position;
@@ -29,6 +31,7 @@ public class Enemies : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
     }
+    //Cuando el zombi este a sus anchas se moverá entre los checkpoint.
     void Update()
     {
         if (!aggro) 
@@ -46,6 +49,7 @@ public class Enemies : MonoBehaviour
         }
         else
         {
+            //Pero cuando el zombi esté cerca del jugador irá hacia él y correrá
             navMeshAgent.SetDestination(objective.transform.position);
             navMeshAgent.speed = 3f;
         }
@@ -66,7 +70,10 @@ public class Enemies : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        //Al ser disparado varias veces, hará una animacion de morirse y se destruirá
     }
+
+    //Esta función hace daño al zombi o lo mata.
     public void HurtZombie()
     {
         if(hp > 0)
@@ -77,6 +84,8 @@ public class Enemies : MonoBehaviour
         {
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             navMeshAgent.speed = 0f;
+            FindObjectOfType<GameManager>().zombies--;
+            Debug.Log(FindObjectOfType<GameManager>().zombies);
             animator.SetBool("Walk", false);
             animator.SetBool("Aggro", false);
             animator.SetBool("Close", false);
@@ -85,6 +94,7 @@ public class Enemies : MonoBehaviour
             disappear2 = Time.time + 2f;
         }
     }
+    //Esta funcion hace daño al jugador cuando colisiona con el
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player"))
