@@ -1045,7 +1045,7 @@ MonoBehaviour:
   gameOver: {fileID: 1090525920}
   nextStage: {fileID: 260967358}
   gameFinished: {fileID: 0}
-  zombies: 1
+  zombies: 9
   level1: 1
   gs: {fileID: 0}
 --- !u!4 &307793507
